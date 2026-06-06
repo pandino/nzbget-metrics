@@ -2,7 +2,7 @@ name: build
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
     tags: ["v*"]
   workflow_dispatch:
 
@@ -30,7 +30,7 @@ jobs:
         with:
           images: ${{ vars.DOCKERHUB_USERNAME }}/nzbget-metrics
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,enable=${{ github.ref_name == 'master' || github.ref_name == 'main' }}
             type=sha
             type=semver,pattern={{version}}
 
