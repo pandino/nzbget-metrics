@@ -4,6 +4,8 @@ A Prometheus exporter for [nzbget](https://nzbget.com/), shipped as a
 [linuxserver.io docker mod](https://www.linuxserver.io/blog/2019-09-14-customizing-our-containers).
 It runs inside the `linuxserver/nzbget` container as an s6 service and scrapes the local JSON-RPC API.
 
+⚠️ Fully AI generated. "It just works."
+
 ## Usage
 
 Add the mod to your nzbget container:
