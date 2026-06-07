@@ -6,8 +6,10 @@ COPY . .
 ARG VERSION=dev
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     go build -ldflags "-s -w -X main.version=${VERSION}" \
-    -o /out/nzbget-metrics ./cmd/nzbget-metrics
+    -o /out/nzbget-metrics ./cmd/nzbget-metrics && \
+    mkdir -p /rootfs/usr/local/bin && \
+    cp /out/nzbget-metrics /rootfs/usr/local/bin/nzbget-metrics
+COPY root/ /rootfs/
 
 FROM scratch
-COPY root/ /
-COPY --from=build /out/nzbget-metrics /usr/local/bin/nzbget-metrics
+COPY --from=build /rootfs/ /
